@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * A new instance of LempelZiv is created for every run.
  */

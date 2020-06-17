@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * A new instance of HuffmanCoding is created for every run. The constructor is
  * passed the full text to be encoded or decoded, so this is a good place to
