@@ -1,8 +1,8 @@
-package main.java;
+package test.java.stringsearch;
 
+import main.java.stringsearch.BruteForce;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -44,9 +44,9 @@ public class PerformanceTest {
 
     @Test
     public void TestBruteForce() throws IOException {
-        BruteForce bf = new BruteForce();
+        BruteForce bf = new BruteForce(pattern);
         testPerformance(() -> {
-            bf.search(pattern, data);
+            bf.search(data);
         }, "Brute Force");
     }
 

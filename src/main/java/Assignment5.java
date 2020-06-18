@@ -1,5 +1,7 @@
 package main.java;
 
+import main.java.stringsearch.BruteForce;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -187,7 +189,7 @@ public class Assignment5 {
 			public void actionPerformed(ActionEvent e) {
 				String pattern = searchField.getText();
 				String text = textEditor.getText();
-				int index = new BruteForce().search(pattern, text);//new KMP(pattern, text).search(pattern, text);
+				int index = new BruteForce(pattern).search(text);//new KMP(pattern, text).search(pattern, text);
 
 				if (index == -1) {
 					JOptionPane.showMessageDialog(frame, "Pattern not found.");

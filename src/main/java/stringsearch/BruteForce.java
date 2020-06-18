@@ -1,12 +1,13 @@
-package main.java;
+package main.java.stringsearch;
 
-public class BruteForce {
+public class BruteForce implements StringSearcher {
+	public final String pattern;
 
-	public BruteForce() {
-		// TODO maybe fill this in.
+	public BruteForce(String pattern) {
+		this.pattern = pattern;
 	}
 
-	public int search(String pattern, String text) {
+	public int search(String text) {
 		for(int iText = 0; iText < text.length(); ++iText) {
 			for(int iPattern = 0; iPattern < pattern.length(); ++iPattern) {
 				if(text.charAt(iText + iPattern) != pattern.charAt(iPattern)) {
