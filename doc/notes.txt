@@ -1,0 +1,4 @@
+Brute force algorithm takes O(mn) time where m is the length of the data and n is the length of the pattern
+KMP takes O(m + n) where m is the length of the data and n is the n is the length of the pattern. m time is taken to search the string, n time is taken to generate the pattern table
+
+in KMP the index in the data never moves backwards.
