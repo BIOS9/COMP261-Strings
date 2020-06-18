@@ -9,7 +9,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 public class StringSearchTest {
-    public static void testStringSearch(StringSearcher searcher, String data) {
+    private static final int DATASET_DIVISION = 8; // Marker may INCREASE this if testing is too slow.
+
+    public static void testStringSearch(StringSearcher searcher, String text) {
+        String data = text.substring(0, text.length() / DATASET_DIVISION);
+
         Set<String> wordlist = new HashSet<>();
         wordlist.addAll(data.chars().parallel().distinct().boxed().map((x) -> String.valueOf((char)x.intValue())).collect(Collectors.toSet()));
         wordlist.addAll(Arrays.stream(data.split("[ \\s-]")).parallel().collect(Collectors.toSet()));

@@ -23,7 +23,7 @@ public class BruteForce implements StringSearcher {
 		char[] pattern = this.pattern.toCharArray();
 		char[] data = text.toCharArray();
 
-		for(int iText = 0; iText < (data.length - pattern.length) + 1 ; ++iText) {
+		for(int iText = 0; iText < (data.length - pattern.length) + 1; ++iText) {
 			for(int iPattern = 0; iPattern < pattern.length; ++iPattern) {
 				if(data[iText + iPattern] != pattern[iPattern]) {
 					break;
