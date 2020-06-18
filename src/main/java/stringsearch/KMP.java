@@ -42,7 +42,7 @@ public class KMP implements StringSearcher {
 			if(text.charAt(i) == pattern.charAt(j)) {
 				++i; ++j;
 
-				if(j == table.length - 1) { // Match found
+				if(j == table.length) { // Match found
 					return i - j;
 				}
 			} else if(j == 0) {

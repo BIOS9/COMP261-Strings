@@ -54,7 +54,7 @@ while (i < length of data)
         i = i + 1
         j = j + 1
 
-        if (j equals length of pattern - 1)
+        if (j equals length of pattern)
             match found at i - j
             either return result here,
             or j = table[j - 1] // j cannot return to start in case pattern can occur intersecting with itself e.g pattern "aaa" might
