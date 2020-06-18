@@ -13,6 +13,8 @@ public class StringSearchTest {
         Set<String> wordlist = new HashSet<>();
         wordlist.addAll(data.chars().parallel().distinct().boxed().map((x) -> String.valueOf((char)x.intValue())).collect(Collectors.toSet()));
         wordlist.addAll(Arrays.stream(data.split("[ \\s-]")).parallel().collect(Collectors.toSet()));
+        wordlist.add(data);
+        wordlist.addAll(wordlist.stream().parallel().map(x -> shuffle(x)).collect(Collectors.toSet()));
         wordlist.remove("");
         assumeFalse(wordlist.isEmpty());
 
@@ -29,5 +31,18 @@ public class StringSearchTest {
                 fail("Searcher index (" + searcherIndex + ") and oracle index (" + oracleIndex + ") do not match for pattern \"" + word + "\" pattern length: " + word.length());
             }
         }
+    }
+
+    public static String shuffle(String input){
+        List<Character> characters = new ArrayList<Character>();
+        for(char c:input.toCharArray()){
+            characters.add(c);
+        }
+        StringBuilder output = new StringBuilder(input.length());
+        while(characters.size()!=0){
+            int randPicker = (int)(Math.random()*characters.size());
+            output.append(characters.remove(randPicker));
+        }
+        return output.toString();
     }
 }
