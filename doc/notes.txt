@@ -50,7 +50,7 @@ let pattern = string to search for
 let table = pattern prefix table
 
 while (i < length of data)
-    if (data[i] equals pattern[i])
+    if (data[i] equals pattern[j])
         i = i + 1
         j = j + 1
 
