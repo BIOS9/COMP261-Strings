@@ -14,8 +14,8 @@ When character is mismatched, the prefix index jumps to the position notated in 
 To build lps table:
 
 ```
-let j = 0
 let i = 1
+let j = 0
 
 let pattern = string to search for
 let table = array with length of pattern string, initialized to empty or 0
@@ -36,4 +36,37 @@ while (i < length of table)
         end if
     end if
 end while
+```
+
+to search using the table
+
+```
+let data = data string in which to search for pattern
+
+let i = 0 // Index in the data to search, never goes backwards
+let j = 0 // Index in the pattern to search for
+
+let pattern = string to search for
+let table = pattern prefix table
+
+while (i < length of data)
+    if (data[i] equals pattern[i])
+        i = i + 1
+        j = j + 1
+
+        if (j equals length of pattern - 1)
+            match found at i - j
+            either return result here,
+            or j = table[j - 1] // j cannot return to start in case pattern can occur intersecting with itself e.g pattern "aaa" might
+        end if
+    else
+        if (j equals 0)
+            i = i + 1
+        else
+            j = table[j - 1]
+        end if
+    end if
+end while
+
+return no match if not already returned
 ```
