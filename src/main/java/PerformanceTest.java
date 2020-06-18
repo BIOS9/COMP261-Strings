@@ -24,7 +24,7 @@ public class PerformanceTest {
     }
 
     private long time(Runnable action, int iterations, int warmUp) {
-        // Warm up to JVM to ensure lazy loading and JIT dont skew results
+        // Warm up to JVM to help ensure lazy loading and JIT dont skew results
         for(int i = 0; i < warmUp; ++i) {
             action.run();
         }
@@ -38,8 +38,8 @@ public class PerformanceTest {
 
     private void testPerformance(Runnable action, String name) {
         long duration = time(action, ITERATIONS, JVM_WARM_UP);
-        double timePerItem = duration / 1000.0;
-        System.out.printf("Time taken for %s: %d ms for %d iterations | %.2f microseconds per operation.\n", name, duration, ITERATIONS, timePerItem);
+        double timePerItem = duration / (double)ITERATIONS;
+        System.out.printf("Time taken for %s: %d ms for %d iterations | %.2f ms per operation.\n", name, duration, ITERATIONS, timePerItem);
     }
 
     @Test
