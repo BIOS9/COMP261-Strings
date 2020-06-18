@@ -34,8 +34,24 @@ public class KMP implements StringSearcher {
 	 * exists, or -1 if it doesn't.
 	 */
 	public int search(String text) {
-		String pattern = this.pattern;
-		// TODO fill this in.
+		String pattern = this.pattern; // To mitigate search failure if pattern is changed concurrently
+		int[] table = this.table;
+		int i = 0, j = 0;
+
+		while (i < text.length()) {
+			if(text.charAt(i) == pattern.charAt(j)) {
+				++i; ++j;
+
+				if(j == table.length - 1) { // Match found
+					return i - j;
+				}
+			} else if(j == 0) {
+				++i;
+			} else {
+				j = table[j - 1];
+			}
+		}
+
 		return -1;
 	}
 
