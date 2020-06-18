@@ -9,12 +9,22 @@ import java.util.HashMap;
  * search method to perform the search itself.
  */
 public class KMP implements StringSearcher {
-	public final String pattern;
-	private final int[] table;
+	private String pattern;
+	private int[] table;
 
 	public KMP(String pattern) {
+		setPattern(pattern);
+	}
+
+	public KMP() { }
+
+	public void setPattern(String pattern) {
 		this.pattern = pattern;
 		table = buildLpsTable(pattern);
+	}
+
+	public String getPattern() {
+		return pattern;
 	}
 
 	/**
@@ -24,6 +34,7 @@ public class KMP implements StringSearcher {
 	 * exists, or -1 if it doesn't.
 	 */
 	public int search(String text) {
+		String pattern = this.pattern;
 		// TODO fill this in.
 		return -1;
 	}
