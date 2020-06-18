@@ -20,7 +20,7 @@ public class KMP implements StringSearcher {
 
 	public void setPattern(String pattern) {
 		this.pattern = pattern.toCharArray();
-		table = buildLpsTable(this.pattern);
+		this.table = buildLpsTable(this.pattern);
 	}
 
 	public String getPattern() {
@@ -63,7 +63,7 @@ public class KMP implements StringSearcher {
 		int[] table = new int[pattern.length];
 		table[0] = 0;
 
-		while (i < (table.length - pattern.length) + 1) {
+		while (i < pattern.length) {
 			if(pattern[i] == pattern[j]) {
 				table[i] = j + 1;
 				++i; ++j;
