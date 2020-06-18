@@ -71,7 +71,6 @@ end while
 return no match if not already returned
 ```
 
-Java String::indexOf doesn't actually use KMP, it just uses the brute force approach.
 
 Performance results:
 BRUTE FORCE:
@@ -93,3 +92,6 @@ Total time taken for KMP was 20.01 seconds.
 I played around with different test data and found that when all of the patterns were a valid match in the text, or did not exist at all, the brute force algorithm was faster.
 The brute force algorithm was also faster on smaller patterns for smaller text due to the overhead of setting up KMP.
 KMP became faster when I added shuffled data in to the patterns to search for.
+
+For most small uses of string search I do not think KMP is worth the trouble. It will usually end up slower and it is harder to implement.
+And it turns out that the Java implementation of String::indexOf doesn't use KMP or any "fast" algorithm to do its job, it just uses the brute force approach.
