@@ -2,3 +2,38 @@ Brute force algorithm takes O(mn) time where m is the length of the data and n i
 KMP takes O(m + n) where m is the length of the data and n is the n is the length of the pattern. m time is taken to search the string, n time is taken to generate the pattern table
 
 in KMP the index in the data never moves backwards.
+
+lps
+0 1 2 3 4 5 6 7 8 9  10 11 12
+a b c d x a b d y a  b  c  a
+0 0 0 0 0 1 2 0 0 1  2  3  1
+
+put position + 1 in the lps table, which is the point to start the next comparison from because it can skip position
+When character is mismatched, the prefix index jumps to the position notated in the previous slot, not 0.
+
+To build lps table:
+
+```
+let j = 0
+let i = 1
+
+let pattern = string to search for
+let table = array with length of pattern string, initialized to empty or 0
+
+initialize first slot in table to 0 if not already done
+
+while (i < length of table)
+    if (pattern[i] equals pattern[j])
+        table[i] = j + 1
+        i = i + 1
+        j = j + 1
+    else
+        if (j equals 0)
+            table[i] = 0;
+            i = i + 1
+        else
+            j = table[j - 1]
+        end if
+    end if
+end while
+```
