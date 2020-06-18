@@ -18,14 +18,18 @@ public class BruteForce implements StringSearcher {
 	}
 
 	public int search(String text) {
-		String pattern = this.pattern; // To mitigate search failure if pattern is changed concurrently
-		for(int iText = 0; iText < text.length(); ++iText) {
-			for(int iPattern = 0; iPattern < pattern.length(); ++iPattern) {
-				if(text.charAt(iText + iPattern) != pattern.charAt(iPattern)) {
+		// using char arrays is MUCH faster than using String::charAt, so if the string is long enough it's worth converting to arr
+		// Also means that concurrent modification of the global pattern will not cause results here to be incorrect
+		char[] pattern = this.pattern.toCharArray();
+		char[] data = text.toCharArray();
+
+		for(int iText = 0; iText < (data.length - pattern.length) + 1 ; ++iText) {
+			for(int iPattern = 0; iPattern < pattern.length; ++iPattern) {
+				if(data[iText + iPattern] != pattern[iPattern]) {
 					break;
 				}
 
-				if(iPattern == pattern.length() - 1) {
+				if(iPattern == pattern.length - 1) {
 					return iText; // Get starting index of match in text
 				}
 			}
