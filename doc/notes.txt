@@ -70,3 +70,5 @@ end while
 
 return no match if not already returned
 ```
+
+Java String::indexOf doesn't actually use KMP, it just uses the brute force approach.
