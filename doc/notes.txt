@@ -115,7 +115,7 @@ let cursor = 0
 let windowSize = 100
 
 while (cursor < text.length - 1)
-    look for longest prefix of text[cursor .. text.length - 1] in text[max(cursor-windowSize, 0) .. cursor - 1]
+    look for longest prefix of text[cursor .. text.length - 1] in text[max(cursor-windowSize, 0) .. cursor - 1] // max is used to select either from start of text (0) or start of window
 
     if found, add [offset, length, text[cursor+length]] to output
     else add [0, 0, text[cursor]] to output
