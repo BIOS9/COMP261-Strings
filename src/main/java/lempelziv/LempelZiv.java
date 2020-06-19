@@ -1,4 +1,4 @@
-package main.java;
+package main.java.lempelziv;
 
 /**
  * A new instance of LempelZiv is created for every run.

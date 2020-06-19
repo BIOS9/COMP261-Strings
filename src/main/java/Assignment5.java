@@ -1,6 +1,7 @@
 package main.java;
 
 import main.java.huffman.HuffmanCoding;
+import main.java.lempelziv.LempelZiv;
 import main.java.stringsearch.BruteForce;
 
 import java.awt.BorderLayout;

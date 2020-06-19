@@ -95,3 +95,60 @@ KMP became faster when I added shuffled data in to the patterns to search for.
 
 For most small uses of string search I do not think KMP is worth the trouble. It will usually end up slower and it is harder to implement.
 And it turns out that the Java implementation of String::indexOf doesn't use KMP or any "fast" algorithm to do its job, it just uses the brute force approach.
+
+
+
+LZ77:
+Can use []| to delimit tuples in text as they do not occur
+every tuple has a character to put on the end
+[offset, length, next symbol]
+e.g [0,0,j] for if first character was j
+
+Outputs a string of the mentioned tuples
+Moves through the text one character at a time
+Drags a sliding windows behind the cursor
+Expands a lookahead buffer from the cursor/The string it tries to match in the sliding window
+
+Pseudocode:
+```
+let cursor = 0
+let windowSize = 100
+
+while (cursor < text.length - 1)
+    look for longest prefix of text[cursor .. text.length - 1] in text[max(cursor-windowSize, 0) .. cursor - 1]
+
+    if found, add [offset, length, text[cursor+length]] to output
+    else add [0, 0, text[cursor]] to output
+    end if
+
+    advance cursor by length + 1
+end while
+```
+
+Probably just use brute force java indexOf to find match
+
+More pseudocode:
+
+```
+let cursor = 0
+let windowSize = 100
+
+while (cursor < text.length - 1)
+    let length = 0
+    let prevMatch = 0
+
+    loop
+        let match = stringMatch(text[cursor.. cursor+length],
+            text[(cursor<windowSize)?0:cursor-windowSize .. cursor - 1])
+
+        if match succeeded then:
+            prevMatch = match
+            length = length + 1
+        else
+            output ([a value for prevMatch, length, text[cursor+length]])
+            cursor = cursor + length + 1
+            break
+        end if
+    end loop
+end while
+```
