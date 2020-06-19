@@ -27,4 +27,22 @@ public class HuffmanTest {
         assertEquals("TreeNode{frequency=6, text='null', left=TreeNode{frequency=4, text='null', left=TreeNode{frequency=2, text='null', left=TreeNode{frequency=1, text='f', left=null, right=null}, right=TreeNode{frequency=1, text='e', left=null, right=null}}, right=TreeNode{frequency=2, text='null', left=TreeNode{frequency=1, text='b', left=null, right=null}, right=TreeNode{frequency=1, text='a', left=null, right=null}}}, right=TreeNode{frequency=2, text='null', left=TreeNode{frequency=1, text='d', left=null, right=null}, right=TreeNode{frequency=1, text='c', left=null, right=null}}}",
                 tree.toString());
     }
+
+    @Test
+    public void testHuffmanMapSimple01() {
+        TreeNode tree = HuffmanCoding.generateTree("abbcccddddeeeee");
+        assertEquals("{a=101, b=100, c=11, d=01, e=00}", HuffmanCoding.createTreeMap(tree).toString());
+    }
+
+    @Test
+    public void testHuffmanMapSimple02() {
+        TreeNode tree = HuffmanCoding.generateTree("ababaacabadeadb");
+        assertEquals("{a=1, b=01, c=0001, d=001, e=0000}", HuffmanCoding.createTreeMap(tree).toString());
+    }
+
+    @Test
+    public void testHuffmanMapSimple03() {
+        TreeNode tree = HuffmanCoding.generateTree("abcdef");
+        assertEquals("{a=011, b=010, c=11, d=10, e=001, f=000}", HuffmanCoding.createTreeMap(tree).toString());
+    }
 }

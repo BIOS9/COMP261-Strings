@@ -1,8 +1,8 @@
 package main.java.huffman;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.PriorityQueue;
+import javafx.util.Pair;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -34,13 +34,35 @@ public class HuffmanCoding {
 		return queue.poll();
 	}
 
+	public static Map<String, String> createTreeMap(TreeNode tree) {
+		Map<String, String> map = new HashMap<>();
+		Stack<Pair<TreeNode, String>> fringe = new Stack<>();
+		fringe.add(new Pair(tree, ""));
+
+		while (!fringe.isEmpty()) {
+			Pair<TreeNode, String> pair = fringe.pop();
+			TreeNode node = pair.getKey();
+			String path = pair.getValue();
+
+			if(node.isLeaf()) {
+				map.put(node.text, path);
+			} else {
+				fringe.push(new Pair(node.left, path + "0"));
+				fringe.push(new Pair(node.right, path + "1"));
+			}
+		}
+
+		return map;
+	}
+
 	/**
 	 * Take an input string, text, and encode it with the stored tree. Should
 	 * return the encoded text as a binary string, that is, a string containing
 	 * only 1 and 0.
 	 */
 	public String encode(String text) {
-		// TODO fill this in.
+		TreeNode tree = generateTree(text);
+		StringBuilder output = new StringBuilder();
 		return "";
 	}
 
