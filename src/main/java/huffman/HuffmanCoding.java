@@ -1,4 +1,9 @@
-package main.java;
+package main.java.huffman;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 /**
  * A new instance of HuffmanCoding is created for every run. The constructor is
@@ -12,6 +17,21 @@ public class HuffmanCoding {
 	 */
 	public HuffmanCoding(String text) {
 		// TODO fill this in.
+	}
+
+	public static TreeNode generateTree(String text) {
+		Map<String, Long> frequencies = Arrays.stream(text.split("")).collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+
+		PriorityQueue<TreeNode> queue = new PriorityQueue<>();
+		queue.addAll(frequencies.entrySet().stream().map(x -> new TreeNode(x.getKey(), x.getValue().intValue())).collect(Collectors.toSet()));
+
+		while (queue.size() > 1) {
+			TreeNode right = queue.poll();
+			TreeNode left = queue.poll();
+			queue.offer(new TreeNode(left, right, right.frequency + left.frequency));
+		}
+
+		return queue.poll();
 	}
 
 	/**
