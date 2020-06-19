@@ -1,5 +1,6 @@
 package main.java.huffman;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -12,11 +13,14 @@ import java.util.stream.Collectors;
  * the encode and decode methods.
  */
 public class HuffmanCoding {
+	TreeNode tree;
+	Map<String, String> encodingMap;
+
 	/**
 	 * This would be a good place to compute and store the tree.
 	 */
-	public HuffmanCoding(String text) {
-		// TODO fill this in.
+	public HuffmanCoding() {
+
 	}
 
 	public static TreeNode generateTree(String text) {
@@ -34,7 +38,7 @@ public class HuffmanCoding {
 		return queue.poll();
 	}
 
-	public static Map<String, String> createTreeMap(TreeNode tree) {
+	public static Map<String, String> generateTreeMap(TreeNode tree) {
 		Map<String, String> map = new HashMap<>();
 		Stack<Pair<TreeNode, String>> fringe = new Stack<>();
 		fringe.add(new Pair(tree, ""));
@@ -61,9 +65,9 @@ public class HuffmanCoding {
 	 * only 1 and 0.
 	 */
 	public String encode(String text) {
-		TreeNode tree = generateTree(text);
-		StringBuilder output = new StringBuilder();
-		return "";
+		tree = generateTree(text);
+		encodingMap = generateTreeMap(tree);
+		return Arrays.stream(text.split("")).map(encodingMap::get).collect(Collectors.joining());
 	}
 
 	/**
@@ -71,8 +75,22 @@ public class HuffmanCoding {
 	 * and return the decoded text as a text string.
 	 */
 	public String decode(String encoded) {
-		// TODO fill this in.
-		return "";
+		StringBuilder builder = new StringBuilder();
+		TreeNode node = tree;
+		for(String s : encoded.split("")) {
+			if(s.equals("0"))
+				node = node.left;
+			else if(s.equals("1"))
+				node = node.right;
+			else
+				throw new IllegalArgumentException("Encoded string contains illegal characters. Only 1 or 0 allowed.");
+
+			if(node.isLeaf()) {
+				builder.append(node.text);
+				node = tree;
+			}
+		}
+		return builder.toString();
 	}
 
 	/**

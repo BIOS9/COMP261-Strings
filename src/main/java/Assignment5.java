@@ -105,7 +105,7 @@ public class Assignment5 {
 				String text = readFile(compressionInputFile);
 
 				// run the algorithms.
-				HuffmanCoding huffman = new HuffmanCoding(text);
+				HuffmanCoding huffman = new HuffmanCoding();
 				String encoded = huffman.encode(text);
 				String decoded = huffman.decode(encoded);
 

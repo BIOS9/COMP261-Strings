@@ -25,14 +25,12 @@ public class TreeNode implements Comparable<TreeNode> {
 
     @Override
     public int compareTo(TreeNode o) {
-        if(frequency < o.frequency)
+        if (frequency < o.frequency)
             return -1;
-        else if(frequency > o.frequency)
+        else if (frequency > o.frequency)
             return 1;
 
-        if(text == null || o.text == null)
-            return 0;
-        return text.compareTo(o.text);
+        return 0;
     }
 
     @Override
