@@ -30,9 +30,13 @@ public class HuffmanCoding {
 		queue.addAll(frequencies.entrySet().stream().map(x -> new TreeNode(x.getKey(), x.getValue().intValue())).collect(Collectors.toSet()));
 
 		while (queue.size() > 1) {
-			TreeNode right = queue.poll();
-			TreeNode left = queue.poll();
-			queue.offer(new TreeNode(left, right, right.frequency + left.frequency));
+			TreeNode a = queue.poll();
+			TreeNode b = queue.poll();
+			if(a.order > b.order) {
+				queue.offer(new TreeNode(a, b, a.frequency + b.frequency));
+			} else {
+				queue.offer(new TreeNode(b, a, a.frequency + b.frequency));
+			}
 		}
 
 		return queue.poll();

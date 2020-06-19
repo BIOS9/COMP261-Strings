@@ -4,12 +4,16 @@ public class TreeNode implements Comparable<TreeNode> {
     public final int frequency;
     public final String text;
     public final TreeNode left, right;
+    public final int order; // Used to ensure order is always the same for nodes with the same frequency.
+
+    private static int currentOrder = 0;
 
     public TreeNode(String text, int frequency) {
         this.frequency = frequency;
         this.text = text;
         this.left = null;
         this.right = null;
+        this.order = currentOrder++;
     }
 
     public TreeNode(TreeNode left, TreeNode right, int frequency) {
@@ -17,6 +21,7 @@ public class TreeNode implements Comparable<TreeNode> {
         this.left = left;
         this.right = right;
         this.text = null;
+        this.order = currentOrder++;
     }
 
     public boolean isLeaf() {
