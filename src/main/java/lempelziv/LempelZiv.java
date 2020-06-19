@@ -23,6 +23,9 @@ public class LempelZiv {
 
         while (cursor < text.length) {
             int[] prefix = findPrefix(text, cursor, text.length, (cursor < windowSize) ? 0 : (cursor - windowSize), cursor);
+            if(prefix != null) {
+
+			}
             cursor++;
         }
 
@@ -32,7 +35,6 @@ public class LempelZiv {
     public static int[] findPrefix(char[] data, int prefixStart, int prefixEnd, int dataStart, int dataEnd) {
         int bestMatch = -1;
         int matchLength = 0;
-        int prefixLength = prefixEnd - prefixStart;
 
         for (int iData = dataStart; iData < dataEnd; ++iData) {
         	int count = 0;
