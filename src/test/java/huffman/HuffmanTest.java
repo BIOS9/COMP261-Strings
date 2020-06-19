@@ -3,6 +3,12 @@ package test.java.huffman;
 import main.java.huffman.HuffmanCoding;
 import main.java.huffman.TreeNode;
 import org.junit.jupiter.api.Test;
+import test.java.Util;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -68,5 +74,59 @@ public class HuffmanTest {
         String encoded = coder.encode("Pe3mxlLK52zuxHxuVReWkhxhKRTfG8ycXp1XuizbU9sVQCanGPYYfjE5wkSpvNGMeCwiD8i5U2kfVLRsT0kOBeBl5uvgMf1NyGs1x1xfEuJF6jbbixkm9Ybu2wf9KDT2hImwghWt2QzNixYMfeZQtQrQMU98su0fw8Y1dKiPf0vbVw4rhKxKcqWPLGyZXXUuZ45Iaa31");
         assertEquals("Pe3mxlLK52zuxHxuVReWkhxhKRTfG8ycXp1XuizbU9sVQCanGPYYfjE5wkSpvNGMeCwiD8i5U2kfVLRsT0kOBeBl5uvgMf1NyGs1x1xfEuJF6jbbixkm9Ybu2wf9KDT2hImwghWt2QzNixYMfeZQtQrQMU98su0fw8Y1dKiPf0vbVw4rhKxKcqWPLGyZXXUuZ45Iaa31", coder.decode(encoded));
         assertEquals(1139, encoded.length());
+    }
+
+    @Test
+    public void testHuffmanEncodeApollo() throws IOException {
+        String data = Util.readString("data/apollo.txt");
+        HuffmanCoding coder = new HuffmanCoding();
+        String encoded = coder.encode(data);
+        assertEquals(data, coder.decode(encoded));
+        assertEquals(25085388, encoded.length());
+    }
+
+    @Test
+    public void testHuffmanEncodeLenna() throws IOException {
+        String data = Util.readString("data/lenna.txt");
+        HuffmanCoding coder = new HuffmanCoding();
+        String encoded = coder.encode(data);
+        assertEquals(data, coder.decode(encoded));
+        assertEquals(1240298, encoded.length());
+    }
+
+    @Test
+    public void testHuffmanEncodePi() throws IOException {
+        String data = Util.readString("data/pi.txt");
+        HuffmanCoding coder = new HuffmanCoding();
+        String encoded = coder.encode(data);
+        assertEquals(data, coder.decode(encoded));
+        assertEquals(3549063, encoded.length());
+    }
+
+    @Test
+    public void testHuffmanEncodeTaisho() throws IOException {
+        String data = Util.readString("data/taisho.txt");
+        HuffmanCoding coder = new HuffmanCoding();
+        String encoded = coder.encode(data);
+        assertEquals(data, coder.decode(encoded));
+        assertEquals(12341254, encoded.length());
+    }
+
+    @Test
+    public void testHuffmanEncodeWarAndPeace() throws IOException {
+        String data = Util.readString("data/war_and_peace.txt");
+        HuffmanCoding coder = new HuffmanCoding();
+        String encoded = coder.encode(data);
+        assertEquals(data, coder.decode(encoded));
+        assertEquals(14788787, encoded.length());
+    }
+
+    @Test
+    public void testHuffmanEncodeAsciiGarbage() throws IOException {
+        String data = Util.readString("data/asciigarbage.txt");
+        HuffmanCoding coder = new HuffmanCoding();
+        String encoded = coder.encode(data);
+        assertEquals(data, coder.decode(encoded));
+        assertEquals(5983068, encoded.length());
     }
 }
