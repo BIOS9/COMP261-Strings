@@ -4,6 +4,7 @@ import main.java.stringsearch.BruteForce;
 import main.java.stringsearch.KMP;
 import main.java.stringsearch.StringSearcher;
 import org.junit.jupiter.api.Test;
+import test.java.Util;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -43,7 +44,7 @@ public class PerformanceTest {
 
     private void testPerformance(StringSearcher searcher, String name) throws IOException {
         System.out.println("Setting up...");
-        String data = Files.readAllLines(Paths.get("data/war_and_peace.txt")).stream().collect(Collectors.joining("\n"));
+        String data = Util.readString("data/war_and_peace.txt");
         data = data.substring(0, data.length() / DATASET_DIVISION); // Data is too big and tests take too long, make it smaller
 
         String badData = Files.readAllLines(Paths.get("data/taisho.txt")).stream().collect(Collectors.joining("\n"));

@@ -2,6 +2,7 @@ package test.java.stringsearch;
 
 import main.java.stringsearch.KMP;
 import org.junit.jupiter.api.Test;
+import test.java.Util;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -75,26 +76,26 @@ public class KmpTest {
 
     @Test
     public void testWarAndPeace() throws IOException {
-        StringSearchTest.testStringSearch(new KMP(), Files.readAllLines(Paths.get("data/war_and_peace.txt")).stream().collect(Collectors.joining("\n")));
+        StringSearchTest.testStringSearch(new KMP(), Util.readString("data/war_and_peace.txt"));
     }
 
     @Test
     public void testTaisho() throws IOException {
-        StringSearchTest.testStringSearch(new KMP(), Files.readAllLines(Paths.get("data/taisho.txt")).stream().collect(Collectors.joining("\n")));
+        StringSearchTest.testStringSearch(new KMP(), Util.readString("data/taisho.txt"));
     }
 
     @Test
     public void testPi() throws IOException {
-        StringSearchTest.testStringSearch(new KMP(), Files.readAllLines(Paths.get("data/pi.txt")).stream().collect(Collectors.joining("\n")));
+        StringSearchTest.testStringSearch(new KMP(), Util.readString("data/pi.txt"));
     }
 
     @Test
     public void testLenna() throws IOException {
-        StringSearchTest.testStringSearch(new KMP(), Files.readAllLines(Paths.get("data/Lenna.txt")).stream().collect(Collectors.joining("\n")));
+        StringSearchTest.testStringSearch(new KMP(), Util.readString("data/lenna.txt"));
     }
 
     @Test
     public void testApollo() throws IOException {
-        StringSearchTest.testStringSearch(new KMP(), Files.readAllLines(Paths.get("data/Apollo.txt")).stream().collect(Collectors.joining("\n")));
+        StringSearchTest.testStringSearch(new KMP(), Util.readString("data/apollo.txt"));
     }
 }

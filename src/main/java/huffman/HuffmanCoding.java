@@ -27,7 +27,7 @@ public class HuffmanCoding {
 		Map<String, Long> frequencies = Arrays.stream(text.split("")).collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
 		PriorityQueue<TreeNode> queue = new PriorityQueue<>();
-		queue.addAll(frequencies.entrySet().stream().map(x -> new TreeNode(x.getKey(), x.getValue().intValue())).collect(Collectors.toSet()));
+		queue.addAll(frequencies.entrySet().stream().map(x -> new TreeNode(x.getKey(), x.getValue().intValue())).collect(Collectors.toList()));
 
 		while (queue.size() > 1) {
 			TreeNode a = queue.poll();

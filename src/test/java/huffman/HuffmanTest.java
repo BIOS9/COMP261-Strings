@@ -30,7 +30,7 @@ public class HuffmanTest {
     @Test
     public void testHuffmanTreeSimple03() {
         TreeNode tree = HuffmanCoding.generateTree("abcdef");
-        assertEquals("TreeNode{frequency=6, text='null', left=TreeNode{frequency=4, text='null', left=TreeNode{frequency=2, text='null', left=TreeNode{frequency=1, text='f', left=null, right=null}, right=TreeNode{frequency=1, text='d', left=null, right=null}}, right=TreeNode{frequency=2, text='null', left=TreeNode{frequency=1, text='c', left=null, right=null}, right=TreeNode{frequency=1, text='a', left=null, right=null}}}, right=TreeNode{frequency=2, text='null', left=TreeNode{frequency=1, text='e', left=null, right=null}, right=TreeNode{frequency=1, text='b', left=null, right=null}}}",
+        assertEquals("TreeNode{frequency=6, text='null', left=TreeNode{frequency=4, text='null', left=TreeNode{frequency=2, text='null', left=TreeNode{frequency=1, text='d', left=null, right=null}, right=TreeNode{frequency=1, text='c', left=null, right=null}}, right=TreeNode{frequency=2, text='null', left=TreeNode{frequency=1, text='e', left=null, right=null}, right=TreeNode{frequency=1, text='b', left=null, right=null}}}, right=TreeNode{frequency=2, text='null', left=TreeNode{frequency=1, text='f', left=null, right=null}, right=TreeNode{frequency=1, text='a', left=null, right=null}}}",
                 tree.toString());
     }
 
@@ -49,7 +49,7 @@ public class HuffmanTest {
     @Test
     public void testHuffmanMapSimple03() {
         TreeNode tree = HuffmanCoding.generateTree("abcdef");
-        assertEquals("{a=001, b=000, c=11, d=10, e=011, f=010}", HuffmanCoding.generateTreeMap(tree).toString());
+        assertEquals("{a=11, b=011, c=001, d=000, e=010, f=10}", HuffmanCoding.generateTreeMap(tree).toString());
     }
 
     @Test
