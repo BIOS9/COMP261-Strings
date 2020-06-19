@@ -23,10 +23,13 @@ public class LempelZiv {
 
         while (cursor < text.length) {
             int[] prefix = findPrefix(text, cursor, text.length, (cursor < windowSize) ? 0 : (cursor - windowSize), cursor);
-            if(prefix != null) {
-
+            if(prefix == null) {
+				output.append("[0,0," + text[cursor] + "]");
+				cursor++;
+			} else {
+				output.append("[" + prefix[0] + "," + prefix[1] + "," + text[cursor + prefix[1]] + "]");
+            	cursor += prefix[1] + 1;
 			}
-            cursor++;
         }
 
         return output.toString();
@@ -62,7 +65,7 @@ public class LempelZiv {
 
         if (bestMatch == -1)
             return null;
-        return new int[] {bestMatch, matchLength};
+        return new int[] {prefixStart - bestMatch, matchLength};
     }
 
     /**

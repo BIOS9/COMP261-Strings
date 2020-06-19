@@ -11,7 +11,7 @@ public class LZTest {
     public void testPrefixSearch01() {
         char[] test = "hellohello".toCharArray();
         int[] result = LempelZiv.findPrefix(test, 5, test.length, 0, 5);
-        assertEquals(0, result[0], "Best match index was wrong.");
+        assertEquals(5, result[0], "Best match index was wrong.");
         assertEquals(5, result[1], "Best match length was wrong.");
     }
 
@@ -19,7 +19,7 @@ public class LZTest {
     public void testPrefixSearch02() {
         char[] test = "helaahello".toCharArray();
         int[] result = LempelZiv.findPrefix(test, 5, test.length, 0, 5);
-        assertEquals(0, result[0], "Best match index was wrong.");
+        assertEquals(5, result[0], "Best match index was wrong.");
         assertEquals(3, result[1], "Best match length was wrong.");
     }
 
@@ -27,7 +27,7 @@ public class LZTest {
     public void testPrefixSearch03() {
         char[] test = "abcdebcabc".toCharArray();
         int[] result = LempelZiv.findPrefix(test, 5, test.length, 0, 5);
-        assertEquals(1, result[0], "Best match index was wrong.");
+        assertEquals(4, result[0], "Best match index was wrong.");
         assertEquals(2, result[1], "Best match length was wrong.");
     }
 
@@ -35,7 +35,7 @@ public class LZTest {
     public void testPrefixSearch04() {
         char[] test = "abcdeddddd".toCharArray();
         int[] result = LempelZiv.findPrefix(test, 5, test.length, 0, 5);
-        assertEquals(3, result[0], "Best match index was wrong.");
+        assertEquals(2, result[0], "Best match index was wrong.");
         assertEquals(1, result[1], "Best match length was wrong.");
     }
 
@@ -64,7 +64,7 @@ public class LZTest {
     public void testPrefixSearch08() {
         char[] test = "abcabcefgh".toCharArray();
         int[] result = LempelZiv.findPrefix(test, 3, test.length, 0, 3);
-        assertEquals(0, result[0], "Best match index was wrong.");
+        assertEquals(3, result[0], "Best match index was wrong.");
         assertEquals(3, result[1], "Best match length was wrong.");
     }
 
@@ -72,7 +72,7 @@ public class LZTest {
     public void testPrefixSearch09() {
         char[] test = "abcdefgabc".toCharArray();
         int[] result = LempelZiv.findPrefix(test, 7, test.length, 0, 7);
-        assertEquals(0, result[0], "Best match index was wrong.");
+        assertEquals(7, result[0], "Best match index was wrong.");
         assertEquals(3, result[1], "Best match length was wrong.");
     }
 
@@ -80,7 +80,7 @@ public class LZTest {
     public void testPrefixSearch10() {
         char[] test = "ababcdabc".toCharArray();
         int[] result = LempelZiv.findPrefix(test, 6, test.length, 0, 6);
-        assertEquals(2, result[0], "Best match index was wrong.");
+        assertEquals(4, result[0], "Best match index was wrong.");
         assertEquals(3, result[1], "Best match length was wrong.");
     }
 
@@ -88,7 +88,7 @@ public class LZTest {
     public void testPrefixSearch11() {
         char[] test = "abcabdabc".toCharArray();
         int[] result = LempelZiv.findPrefix(test, 6, test.length, 0, 6);
-        assertEquals(0, result[0], "Best match index was wrong.");
+        assertEquals(6, result[0], "Best match index was wrong.");
         assertEquals(3, result[1], "Best match length was wrong.");
     }
 }
