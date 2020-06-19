@@ -93,6 +93,14 @@ public class HuffmanCoding {
 		return builder.toString();
 	}
 
+	public Map<String, String> getEncodingMap() {
+		return encodingMap;
+	}
+
+	public TreeNode getTree() {
+		return tree;
+	}
+
 	/**
 	 * The getInformation method is here for your convenience, you don't need to
 	 * fill it in if you don't wan to. It is called on every run and its return
