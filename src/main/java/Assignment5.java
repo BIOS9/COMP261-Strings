@@ -325,6 +325,7 @@ public class Assignment5 {
 		compressionOutput.setLineWrap(true);
 		compressionOutput.setWrapStyleWord(true);
 		compressionOutput.setEditable(false);
+		compressionOutput.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
 		scroll = new JScrollPane(compressionOutput);
 
 		// put it all together
@@ -332,10 +333,11 @@ public class Assignment5 {
 		layout = new BorderLayout();
 		layout.setVgap(LAYOUT_GAP);
 		right.setLayout(layout);
-		right.add(compressionOutput, BorderLayout.CENTER);
+		right.add(scroll, BorderLayout.CENTER);
 
 		JPanel compression = new JPanel();
 		compression.setLayout(new BoxLayout(compression, BoxLayout.LINE_AXIS));
+		left.setMaximumSize(new Dimension(400, Integer.MAX_VALUE));
 		compression.add(left);
 		compression.add(right);
 

@@ -1,6 +1,7 @@
 package main.java.huffman;
 
 import javafx.util.Pair;
+import sun.awt.image.ImageWatched;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -38,7 +39,9 @@ public class HuffmanCoding {
 			}
 		}
 
-		return queue.poll();
+		TreeNode root = queue.poll();
+		root.setRoot();
+		return root;
 	}
 
 	public static Map<String, String> generateTreeMap(TreeNode tree) {
@@ -111,6 +114,50 @@ public class HuffmanCoding {
 	 * out the encoding tree.
 	 */
 	public String getInformation() {
-		return "";
+		StringBuilder sb = new StringBuilder();
+
+		Queue<TreeNode> nodes = new LinkedList<>();
+		nodes.add(tree);
+		int prevWidth = 0;
+		int currentDepth = 0;
+
+		while (!nodes.isEmpty()) {
+			TreeNode node = nodes.poll();
+			int nodeDepth = node.getDepth();
+			if(nodeDepth > currentDepth) {
+				sb.append("\n\n");
+				currentDepth = nodeDepth;
+			}
+			int nodeWidth = node.getWidth();
+
+			if(node.isLeaf()) {
+				sb.append(rep(nodeWidth / 2, " "));
+				sb.append(node.text);
+				sb.append(rep(nodeWidth / 2, " "));
+			} else {
+				sb.append(rep(node.left.getWidth(), " "));
+				sb.append("*");
+				sb.append(rep(node.right.getWidth(), " "));
+
+				nodes.add(node.left);
+				nodes.add(node.right);
+			}
+
+			//prevWidth = nodeWidth;
+		}
+
+		sb.append("\n\n\n");
+		for(Map.Entry<String, String> c : encodingMap.entrySet()) {
+			sb.append(c.getKey() + " | " + c.getValue() + "\n");
+		}
+
+		return sb.toString();
+	}
+
+	private String rep(int number, String text) {
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < number; ++i)
+			sb.append(text);
+		return sb.toString();
 	}
 }
