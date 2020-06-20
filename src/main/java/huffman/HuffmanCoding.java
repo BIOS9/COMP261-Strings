@@ -118,11 +118,10 @@ public class HuffmanCoding {
 
 		Queue<TreeNode> nodes = new LinkedList<>();
 		nodes.add(tree);
-		int prevWidth = 0;
 		int currentDepth = 0;
 
 
-		sb.append("Here is a badly drawn tree, probably better to just look at the table below.\n\n");
+		sb.append("\nHere is a badly drawn tree, probably better to just look at the table below.\n\n");
 		while (!nodes.isEmpty()) {
 			TreeNode node = nodes.poll();
 			int nodeDepth = node.getDepth();
