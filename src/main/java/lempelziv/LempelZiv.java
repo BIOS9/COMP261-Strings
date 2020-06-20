@@ -25,50 +25,66 @@ public class LempelZiv {
         StringBuilder output = new StringBuilder();
 
         while (cursor < text.length) {
-            int[] prefix = findPrefix(text, cursor, text.length, (cursor < windowSize) ? 0 : (cursor - windowSize), cursor);
-            if(prefix == null) {
-				output.append("[0|0|" + text[cursor] + "]");
-				cursor++;
-			} else {
-				output.append("[" + prefix[0] + "|" + prefix[1] + "|" + text[cursor + prefix[1]] + "]");
-            	cursor += prefix[1] + 1;
-			}
+            int[] prefix = findPrefix(text, cursor, text.length, (cursor < windowSize) ? 0 : (cursor - windowSize), cursor); // Find best partial match in window
+            if (prefix == null) {
+                output.append("[0|0|" + text[cursor] + "]");
+                cursor++;
+            } else {
+
+                // Check if there is another character to grab at the end, if not, dont try grab it
+                if (cursor + prefix[1] >= text.length)
+                    output.append("[" + prefix[0] + "|" + prefix[1] + "|]");
+                else
+                    output.append("[" + prefix[0] + "|" + prefix[1] + "|" + text[cursor + prefix[1]] + "]");
+
+                cursor += prefix[1] + 1;
+            }
         }
 
         return output.toString();
     }
 
+    /**
+     * Find a partial or full match in the given data using the pattern of prefix.
+     */
     public static int[] findPrefix(char[] data, int prefixStart, int prefixEnd, int dataStart, int dataEnd) {
+        // Best found result
         int bestMatch = -1;
         int matchLength = 0;
 
+        // Brute force based partial match search
         for (int iData = dataStart; iData < dataEnd; ++iData) {
-        	int count = 0;
-        	int currentMatch = -1;
-        	int currentLength = 0;
+            int count = 0;
+
+            // Current result
+            int currentMatch = -1;
+            int currentLength = 0;
 
             for (int iPrefix = prefixStart; iPrefix < prefixEnd; ++iPrefix) {
-            	if(iData + count >= dataEnd)
-            		break;
-				if(data[iData + count] == data[iPrefix]) {
-					if(currentMatch == -1)
-						currentMatch = iData;
-					++currentLength;
-				} else {
-					break;
-				}
-				++count;
+                if (iData + count >= dataEnd) // Ensure matching is not done outside of data window
+                    break;
+
+                if (data[iData + count] == data[iPrefix]) { // Main comparison
+                    if (currentMatch == -1)
+                        currentMatch = iData;
+                    ++currentLength;
+                } else {
+                    break;
+                }
+                ++count; // Length of match so far
             }
 
-			if(currentLength > matchLength) {
-				bestMatch = currentMatch;
-				matchLength = currentLength;
-			}
+            // Compare current result with best match
+            if (currentLength > matchLength) {
+                // Overwrite if better
+                bestMatch = currentMatch;
+                matchLength = currentLength;
+            }
         }
 
         if (bestMatch == -1)
             return null;
-        return new int[] {prefixStart - bestMatch, matchLength};
+        return new int[]{prefixStart - bestMatch, matchLength};
     }
 
     /**
@@ -78,8 +94,8 @@ public class LempelZiv {
     public String decompress(String compressed) {
         StringBuilder sb = new StringBuilder();
         char[] data = compressed.toCharArray();
-        for(int i = 0; i < data.length; ++i) {
-            if(data[i] != '[') // Require open bracket
+        for (int i = 0; i < data.length; ++i) {
+            if (data[i] != '[') // Require open bracket
                 throw new IllegalStateException("Required '[' missing.");
             ++i;
 
@@ -89,20 +105,24 @@ public class LempelZiv {
             int[] length = readInt(data, i); // Read the second length number
             i = length[1];
 
-            char c = data[i];
-            if(c == ']' || c == '[' || c == '|') // Check that a character is actually present
+            Character c = data[i];
+            if(c == ']') // Dont add character, none available
+                c = null;
+            else if (c == '[' || c == '|') // Check that a character is valid
                 throw new IllegalStateException("Required character missing.");
-            ++i;
+            else
+                ++i;
 
-            if(data[i] != ']') // Require closing bracket
+            if (data[i] != ']') // Require closing bracket
                 throw new IllegalStateException("Required ']' missing.");
 
-            if(offset[0] != 0 && length[0] != 0) { // If length and offset are non-zero then reference existing characters by offset
+            if (offset[0] != 0 && length[0] != 0) { // If length and offset are non-zero then reference existing characters by offset
                 int textStart = sb.length() - offset[0]; // Start of the text to reference/add
-                for(int j = textStart; j < textStart + length[0]; ++j) // Add all referenced characters
+                for (int j = textStart; j < textStart + length[0]; ++j) // Add all referenced characters
                     sb.append(sb.charAt(j));
             }
-            sb.append(c); // Add character on it's own
+            if(c != null)
+                sb.append(c); // Add character on it's own
         }
 
         return sb.toString();
@@ -110,7 +130,7 @@ public class LempelZiv {
 
     /**
      * Reads integer from compressed LZ77 character block
-     *
+     * <p>
      * Returns an array containing the read value and the index to start the next read from.
      */
     private int[] readInt(char[] data, int i) {
@@ -119,13 +139,13 @@ public class LempelZiv {
             value *= 10;
             value += Integer.parseInt(String.valueOf(data[i]));
             ++i;
-            if(data[i] == '|')
+            if (data[i] == '|')
                 break;
         }
-        if(data[i] != '|') // Require separator
+        if (data[i] != '|') // Require separator
             throw new IllegalStateException("Required '|' missing.");
         ++i;
-        return new int[] { value, i };
+        return new int[]{value, i};
     }
 
     /**
