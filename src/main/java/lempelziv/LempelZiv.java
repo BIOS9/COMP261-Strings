@@ -115,8 +115,6 @@ public class LempelZiv {
             if(data[i] != ']')
                 throw new IllegalStateException("Required ']' missing.");
 
-            System.out.println(offset + ", " + length);
-
             if(offset == 0 && length == 0) {
                 sb.append(c);
             } else {
@@ -126,9 +124,7 @@ public class LempelZiv {
                 sb.append(c);
             }
         }
-
-
-        System.out.println(sb.toString());
+        
         return sb.toString();
     }
 
