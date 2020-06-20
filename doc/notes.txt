@@ -96,6 +96,24 @@ KMP became faster when I added shuffled data in to the patterns to search for.
 For most small uses of string search I do not think KMP is worth the trouble. It will usually end up slower and it is harder to implement.
 And it turns out that the Java implementation of String::indexOf doesn't use KMP or any "fast" algorithm to do its job, it just uses the brute force approach.
 
+Huffman results:
+War and peace:
+input length:  3258246 bytes
+output length: 1848598 bytes
+original and decoded texts match.
+Compression ratio: 1.76
+
+Taisho:
+input length:  3649944 bytes
+output length: 1542656 bytes
+original and decoded texts match.
+Compression ratio: 2.36
+
+Pi:
+input length:  1010003 bytes
+output length: 443632 bytes
+original and decoded texts match.
+Compression ratio: 2.27
 
 
 LZ77:
