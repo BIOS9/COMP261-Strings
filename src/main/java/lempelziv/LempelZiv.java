@@ -79,53 +79,53 @@ public class LempelZiv {
         StringBuilder sb = new StringBuilder();
         char[] data = compressed.toCharArray();
         for(int i = 0; i < data.length; ++i) {
-            if(data[i] != '[')
+            if(data[i] != '[') // Require open bracket
                 throw new IllegalStateException("Required '[' missing.");
             ++i;
 
-            int offset = 0;
-            while (i < data.length - 1) {
-                offset *= 10;
-                offset += Integer.parseInt(String.valueOf(data[i]));
-                ++i;
-                if(data[i] == '|')
-                   break;
-            }
-            if(data[i] != '|')
-                throw new IllegalStateException("Required '|' missing.");
-            ++i;
+            int[] offset = readInt(data, i); // Read the first offset number
+            i = offset[1];
 
-            int length = 0;
-            while (i < data.length - 1) {
-                length *= 10;
-                length += Integer.parseInt(String.valueOf(data[i]));
-                ++i;
-                if(data[i] == '|')
-                    break;
-            }
-            if(data[i] != '|')
-                throw new IllegalStateException("Required '|' missing.");
-            ++i;
+            int[] length = readInt(data, i); // Read the second length number
+            i = length[1];
 
             char c = data[i];
-            if(c == ']' || c == '[' || c == '|')
+            if(c == ']' || c == '[' || c == '|') // Check that a character is actually present
                 throw new IllegalStateException("Required character missing.");
             ++i;
 
-            if(data[i] != ']')
+            if(data[i] != ']') // Require closing bracket
                 throw new IllegalStateException("Required ']' missing.");
 
-            if(offset == 0 && length == 0) {
-                sb.append(c);
-            } else {
-                int textStart = sb.length() - offset;
-                for(int j = textStart; j < textStart + length; ++j)
+            if(offset[0] != 0 && length[0] != 0) { // If length and offset are non-zero then reference existing characters by offset
+                int textStart = sb.length() - offset[0]; // Start of the text to reference/add
+                for(int j = textStart; j < textStart + length[0]; ++j) // Add all referenced characters
                     sb.append(sb.charAt(j));
-                sb.append(c);
             }
+            sb.append(c); // Add character on it's own
         }
-        
+
         return sb.toString();
+    }
+
+    /**
+     * Reads integer from compressed LZ77 character block
+     *
+     * Returns an array containing the read value and the index to start the next read from.
+     */
+    private int[] readInt(char[] data, int i) {
+        int value = 0;
+        while (i < data.length - 1) {
+            value *= 10;
+            value += Integer.parseInt(String.valueOf(data[i]));
+            ++i;
+            if(data[i] == '|')
+                break;
+        }
+        if(data[i] != '|') // Require separator
+            throw new IllegalStateException("Required '|' missing.");
+        ++i;
+        return new int[] { value, i };
     }
 
     /**
