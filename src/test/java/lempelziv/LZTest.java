@@ -2,6 +2,9 @@ package test.java.lempelziv;
 
 import main.java.lempelziv.LempelZiv;
 import org.junit.jupiter.api.Test;
+import test.java.Util;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -118,5 +121,45 @@ public class LZTest {
         LempelZiv lz = new LempelZiv();
         String decompressed = lz.decompress("[0|0|H][0|0|e][0|0|l][1|1|o][0|0| ][0|0|t][0|0|h][0|0|i][0|0|s][5|1|i][3|2|a][10|2|e][9|1|t][15|1|o][0|0|f][18|3|e][22|1|e][0|0|n][0|0|c][27|1|d][25|1|n][0|0|g]");
         assertEquals("Hello this is a test of the encoding", decompressed);
+    }
+
+    @Test
+    public void testApollo() throws IOException {
+        LempelZiv lz = new LempelZiv();
+        String data = Util.readString("data/apollo.txt");
+        String compressed = lz.compress(data, 100);
+        assertEquals(data, lz.decompress(compressed));
+    }
+
+    @Test
+    public void testLenna() throws IOException {
+        LempelZiv lz = new LempelZiv();
+        String data = Util.readString("data/lenna.txt");
+        String compressed = lz.compress(data, 100);
+        assertEquals(data, lz.decompress(compressed));
+    }
+
+    @Test
+    public void testPi() throws IOException {
+        LempelZiv lz = new LempelZiv();
+        String data = Util.readString("data/pi.txt");
+        String compressed = lz.compress(data, 100);
+        assertEquals(data, lz.decompress(compressed));
+    }
+
+    @Test
+    public void testTaisho() throws IOException {
+        LempelZiv lz = new LempelZiv();
+        String data = Util.readString("data/taisho.txt");
+        String compressed = lz.compress(data, 100);
+        assertEquals(data, lz.decompress(compressed));
+    }
+
+    @Test
+    public void testWarAndPeace() throws IOException {
+        LempelZiv lz = new LempelZiv();
+        String data = Util.readString("data/war_and_peace.txt");
+        String compressed = lz.compress(data, 100);
+        assertEquals(data, lz.decompress(compressed));
     }
 }
