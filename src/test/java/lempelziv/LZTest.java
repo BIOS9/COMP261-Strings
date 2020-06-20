@@ -91,4 +91,32 @@ public class LZTest {
         assertEquals(6, result[0], "Best match index was wrong.");
         assertEquals(3, result[1], "Best match length was wrong.");
     }
+
+    @Test
+    public void testEncode01() {
+        LempelZiv lz = new LempelZiv();
+        String compressed = lz.compress("Hello", 100);
+        assertEquals("[0|0|H][0|0|e][0|0|l][1|1|o]", compressed);
+    }
+
+    @Test
+    public void testEncode02() {
+        LempelZiv lz = new LempelZiv();
+        String compressed = lz.compress("Hello this is a test of the encoding", 100);
+        assertEquals("[0|0|H][0|0|e][0|0|l][1|1|o][0|0| ][0|0|t][0|0|h][0|0|i][0|0|s][5|1|i][3|2|a][10|2|e][9|1|t][15|1|o][0|0|f][18|3|e][22|1|e][0|0|n][0|0|c][27|1|d][25|1|n][0|0|g]", compressed);
+    }
+
+    @Test
+    public void testDecode01() {
+        LempelZiv lz = new LempelZiv();
+        String decompressed = lz.decompress("[0|0|H][0|0|e][0|0|l][1|1|o]");
+        assertEquals("Hello", decompressed);
+    }
+
+    @Test
+    public void testDecode02() {
+        LempelZiv lz = new LempelZiv();
+        String decompressed = lz.decompress("[0|0|H][0|0|e][0|0|l][1|1|o][0|0| ][0|0|t][0|0|h][0|0|i][0|0|s][5|1|i][3|2|a][10|2|e][9|1|t][15|1|o][0|0|f][18|3|e][22|1|e][0|0|n][0|0|c][27|1|d][25|1|n][0|0|g]");
+        assertEquals("Hello this is a test of the encoding", decompressed);
+    }
 }

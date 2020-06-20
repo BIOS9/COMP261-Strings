@@ -2,6 +2,9 @@ package main.java.lempelziv;
 
 import javafx.util.Pair;
 
+import java.util.IllegalFormatException;
+import java.util.Scanner;
+
 /**
  * A new instance of LempelZiv is created for every run.
  */
@@ -24,10 +27,10 @@ public class LempelZiv {
         while (cursor < text.length) {
             int[] prefix = findPrefix(text, cursor, text.length, (cursor < windowSize) ? 0 : (cursor - windowSize), cursor);
             if(prefix == null) {
-				output.append("[0,0," + text[cursor] + "]");
+				output.append("[0|0|" + text[cursor] + "]");
 				cursor++;
 			} else {
-				output.append("[" + prefix[0] + "," + prefix[1] + "," + text[cursor + prefix[1]] + "]");
+				output.append("[" + prefix[0] + "|" + prefix[1] + "|" + text[cursor + prefix[1]] + "]");
             	cursor += prefix[1] + 1;
 			}
         }
@@ -73,8 +76,60 @@ public class LempelZiv {
      * text string.
      */
     public String decompress(String compressed) {
-        // TODO fill this in.
-        return "";
+        StringBuilder sb = new StringBuilder();
+        char[] data = compressed.toCharArray();
+        for(int i = 0; i < data.length; ++i) {
+            if(data[i] != '[')
+                throw new IllegalStateException("Required '[' missing.");
+            ++i;
+
+            int offset = 0;
+            while (i < data.length - 1) {
+                offset *= 10;
+                offset += Integer.parseInt(String.valueOf(data[i]));
+                ++i;
+                if(data[i] == '|')
+                   break;
+            }
+            if(data[i] != '|')
+                throw new IllegalStateException("Required '|' missing.");
+            ++i;
+
+            int length = 0;
+            while (i < data.length - 1) {
+                length *= 10;
+                length += Integer.parseInt(String.valueOf(data[i]));
+                ++i;
+                if(data[i] == '|')
+                    break;
+            }
+            if(data[i] != '|')
+                throw new IllegalStateException("Required '|' missing.");
+            ++i;
+
+            char c = data[i];
+            if(c == ']' || c == '[' || c == '|')
+                throw new IllegalStateException("Required character missing.");
+            ++i;
+
+            if(data[i] != ']')
+                throw new IllegalStateException("Required ']' missing.");
+
+            System.out.println(offset + ", " + length);
+
+            if(offset == 0 && length == 0) {
+                sb.append(c);
+            } else {
+                int textStart = sb.length() - offset;
+                for(int j = textStart; j < textStart + length; ++j)
+                    sb.append(sb.charAt(j));
+                sb.append(c);
+            }
+        }
+
+
+        System.out.println(sb.toString());
+        return sb.toString();
     }
 
     /**
