@@ -1,14 +1,10 @@
 package test.java.stringsearch;
 
 import main.java.stringsearch.BruteForce;
-import main.java.stringsearch.KMP;
 import org.junit.jupiter.api.Test;
 import test.java.Util;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Collectors;
 
 public class BruteForceTest {
     @Test

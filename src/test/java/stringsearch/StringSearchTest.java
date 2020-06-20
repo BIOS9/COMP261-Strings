@@ -1,6 +1,7 @@
 package test.java.stringsearch;
 
 import main.java.stringsearch.StringSearcher;
+
 import java.util.*;
 import java.util.stream.Collectors;
 

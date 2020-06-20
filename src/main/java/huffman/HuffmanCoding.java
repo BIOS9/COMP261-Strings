@@ -1,6 +1,5 @@
 package main.java.huffman;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.util.Pair;
 
 import java.util.*;

@@ -1,7 +1,5 @@
 package main.java.stringsearch;
 
-import java.util.HashMap;
-
 /**
  * A new KMP instance is created for every substring search performed. Both the
  * pattern and the text are passed to the constructor and the search method. You

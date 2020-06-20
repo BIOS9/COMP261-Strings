@@ -1,10 +1,5 @@
 package main.java.lempelziv;
 
-import javafx.util.Pair;
-
-import java.util.IllegalFormatException;
-import java.util.Scanner;
-
 /**
  * A new instance of LempelZiv is created for every run.
  */
