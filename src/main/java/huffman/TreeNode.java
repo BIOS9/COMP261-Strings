@@ -62,6 +62,13 @@ public class TreeNode implements Comparable<TreeNode> {
         setDepth(0);
     }
 
+    public String getTextRepresentation() {
+        if(isLeaf())
+            return text.replace("\n", "\\n");
+
+        return left.getTextRepresentation() + right.getTextRepresentation();
+    }
+
     @Override
     public String toString() {
         return "TreeNode{" +

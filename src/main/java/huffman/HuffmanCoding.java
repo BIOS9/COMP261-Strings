@@ -121,6 +121,8 @@ public class HuffmanCoding {
 		int prevWidth = 0;
 		int currentDepth = 0;
 
+
+		sb.append("Here is a badly drawn tree, probably better to just look at the table below.\n\n");
 		while (!nodes.isEmpty()) {
 			TreeNode node = nodes.poll();
 			int nodeDepth = node.getDepth();
@@ -146,9 +148,23 @@ public class HuffmanCoding {
 			//prevWidth = nodeWidth;
 		}
 
-		sb.append("\n\n\n");
+		sb.append("\n\n\nCharacter encoding values:\n");
 		for(Map.Entry<String, String> c : encodingMap.entrySet()) {
-			sb.append(c.getKey() + " | " + c.getValue() + "\n");
+			sb.append("'" + c.getKey().replace("\n", "\\n") + "'  =  " + c.getValue() + "\n");
+		}
+
+		sb.append("\n\n\nTree table:\n");
+		Stack<TreeNode> fringe = new Stack<>();
+		fringe.add(tree);
+
+		while (!fringe.isEmpty()) {
+			TreeNode node = fringe.pop();
+			if(node.isLeaf())
+				continue;
+
+			sb.append("'" + node.getTextRepresentation() + "'  =  '" + node.left.getTextRepresentation() + "'  +  '" + node.right.getTextRepresentation() + "'\n");
+			fringe.add(node.left);
+			fringe.add(node.right);
 		}
 
 		return sb.toString();
