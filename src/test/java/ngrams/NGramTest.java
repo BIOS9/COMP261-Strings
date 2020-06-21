@@ -65,4 +65,41 @@ public class NGramTest {
         NGrams nGrams = new NGrams(4, "aacd");
         assertEquals("{={a=0.5, c=0.25, d=0.25}, aa={c=1.0}, a={a=0.5, c=0.5}, aac={d=1.0}, ac={d=1.0}, c={d=1.0}}", nGrams.prefixes.toString());
     }
+
+    @Test
+    public void testMostLikely01() {
+        NGrams nGrams = new NGrams(4, "aacd");
+        assertEquals('c', nGrams.findMostLikelyChar("aa"));
+    }
+
+    @Test
+    public void testMostLikely02() {
+        NGrams nGrams = new NGrams(4, "acadac");
+        assertEquals('c', nGrams.findMostLikelyChar("a"));
+    }
+
+    @Test
+    public void testProbability01() {
+        NGrams nGrams = new NGrams(4, "acad");
+        assertEquals(0.5, nGrams.findProbabilityOf("a", 'c'));
+        assertEquals(0.5, nGrams.findProbabilityOf("a", 'd'));
+    }
+
+    @Test
+    public void testProbability02() {
+        NGrams nGrams = new NGrams(4, "aaaa");
+        assertEquals(1, nGrams.findProbabilityOf("", 'a'));
+    }
+
+    @Test
+    public void testProbability03() {
+        NGrams nGrams = new NGrams(4, "abcd");
+        assertEquals(0.25, nGrams.findProbabilityOf("", 'a'));
+    }
+
+    @Test
+    public void testProbability04() {
+        NGrams nGrams = new NGrams(4, "ababab");
+        assertEquals(1, nGrams.findProbabilityOf("ab", 'a'));
+    }
 }
