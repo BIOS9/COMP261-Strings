@@ -1,5 +1,7 @@
 package main.java.ngrams;
 
+import javafx.util.Pair;
+
 import java.nio.channels.FileLock;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -53,7 +55,12 @@ public class NGrams {
         }
     }
 
-    public Character findMostLikelyChar(String prefix) {
+    /**
+     * Finds the most likely char to appear next given a prefix.
+     * @param prefix Prefix to use for probability search.
+     * @return The best match prefix found after backing-off if no matches found.
+     */
+    public Pair<Character, String> findMostLikelyChar(String prefix) {
         while (prefix.length() >= 0) {
             if (prefixes.containsKey(prefix)) {
                 Map<Character, Float> chars = prefixes.get(prefix);
@@ -66,7 +73,7 @@ public class NGrams {
                             prob = c.getValue();
                         }
                     }
-                    return bestChar;
+                    return new Pair(bestChar, prefix);
                 }
             }
             prefix = prefix.substring(1);
@@ -75,17 +82,41 @@ public class NGrams {
         return null;
     }
 
-    public float findProbabilityOf(String prefix, char c) {
+    /**
+     * Finds the probability of a char to appear next given a prefix.
+     * @param prefix Prefix to use for probability search.
+     * @return The best match prefix found after backing-off if no matches found.
+     */
+    public Pair<Float, String> findProbabilityOf(String prefix, char c) {
         while (prefix.length() >= 0) {
             if (prefixes.containsKey(prefix)) {
                 Map<Character, Float> chars = prefixes.get(prefix);
                 if(chars.containsKey(c)) {
-                    return chars.get(c);
+                    return new Pair(chars.get(c), prefix);
                 }
             }
             prefix = prefix.substring(1);
         }
 
-        return 0;
+        return null;
+    }
+
+    /**
+     * Finds probability of a string occurring.
+     * @param text Text to find probability of.
+     * @return Log2 probability of the text occurring.
+     */
+    public float findLogProbabilityOf(String text) {
+        float logProb = 1;
+        for(int i = 0; i < text.length(); ++i) {
+            int nInit = Math.min(maxPrefixSize, i); // Size of prefix. Cuts smaller at start of string.
+            char c = text.charAt(i);
+            String prefix = text.substring(i - nInit, i);
+            Pair<Float, String> prob = findProbabilityOf(prefix, c);
+            float finalProb = prob.getKey() == 0 ? 1e-10f : prob.getKey();
+            logProb += (Math.log(finalProb) / Math.log(2) + 1e-10);
+        }
+
+        return logProb;
     }
 }

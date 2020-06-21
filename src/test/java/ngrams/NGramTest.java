@@ -69,61 +69,61 @@ public class NGramTest {
     @Test
     public void testMostLikely01() {
         NGrams nGrams = new NGrams(4, "aacd");
-        assertEquals('c', nGrams.findMostLikelyChar("aa"));
+        assertEquals('c', nGrams.findMostLikelyChar("aa").getKey());
     }
 
     @Test
     public void testMostLikely02() {
         NGrams nGrams = new NGrams(4, "acadac");
-        assertEquals('c', nGrams.findMostLikelyChar("a"));
+        assertEquals('c', nGrams.findMostLikelyChar("a").getKey());
     }
 
     @Test
     public void testMostLikelyBackOff01() {
         NGrams nGrams = new NGrams(4, "abcd");
-        assertEquals('d', nGrams.findMostLikelyChar("ccc"));
+        assertEquals('d', nGrams.findMostLikelyChar("ccc").getKey());
     }
 
     @Test
     public void testMostLikelyBackOff02() {
         NGrams nGrams = new NGrams(4, "abcdccf");
-        assertEquals('f', nGrams.findMostLikelyChar("ccc"));
+        assertEquals('f', nGrams.findMostLikelyChar("ccc").getKey());
     }
 
     @Test
     public void testProbability01() {
         NGrams nGrams = new NGrams(4, "acad");
-        assertEquals(0.5, nGrams.findProbabilityOf("a", 'c'));
-        assertEquals(0.5, nGrams.findProbabilityOf("a", 'd'));
+        assertEquals(0.5f, nGrams.findProbabilityOf("a", 'c').getKey());
+        assertEquals(0.5f, nGrams.findProbabilityOf("a", 'd').getKey());
     }
 
     @Test
     public void testProbability02() {
         NGrams nGrams = new NGrams(4, "aaaa");
-        assertEquals(1, nGrams.findProbabilityOf("", 'a'));
+        assertEquals(1f, nGrams.findProbabilityOf("", 'a').getKey());
     }
 
     @Test
     public void testProbability03() {
         NGrams nGrams = new NGrams(4, "abcd");
-        assertEquals(0.25, nGrams.findProbabilityOf("", 'a'));
+        assertEquals(0.25f, nGrams.findProbabilityOf("", 'a').getKey());
     }
 
     @Test
     public void testProbability04() {
         NGrams nGrams = new NGrams(4, "ababab");
-        assertEquals(1, nGrams.findProbabilityOf("ab", 'a'));
+        assertEquals(1f, nGrams.findProbabilityOf("ab", 'a').getKey());
     }
 
     @Test
     public void testProbabilityBackOff01() {
         NGrams nGrams = new NGrams(4, "abcd");
-        assertEquals(1, nGrams.findProbabilityOf("ccc", 'd'));
+        assertEquals(1f, nGrams.findProbabilityOf("ccc", 'd').getKey());
     }
 
     @Test
     public void testProbabilityBackOff02() {
         NGrams nGrams = new NGrams(4, "abcdccf");
-        assertEquals(1, nGrams.findProbabilityOf("ccc", 'f'));
+        assertEquals(1f, nGrams.findProbabilityOf("ccc", 'f').getKey());
     }
 }
