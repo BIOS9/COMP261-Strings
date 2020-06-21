@@ -25,7 +25,7 @@ public class NGrams {
         char[] data = text.toCharArray();
 
         for(int i = 0; i < data.length; ++i) {
-            for(int prefixLength = 0; prefixLength < maxPrefixSize; ++prefixLength) {
+            for(int prefixLength = 0; prefixLength <= maxPrefixSize; ++prefixLength) {
                 if(i + prefixLength >= data.length) // Skip prefixes that go out of bounds
                     continue;
                 String prefix = String.valueOf(Arrays.copyOfRange(data, i, i + prefixLength));

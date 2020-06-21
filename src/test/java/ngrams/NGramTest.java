@@ -30,4 +30,39 @@ public class NGramTest {
         assertEquals("{={a=0.25, b=0.25, c=0.25, d=0.25}, a={b=1.0}, ab={c=1.0}, bc={d=1.0}, b={c=1.0}, abc={d=1.0}, c={d=1.0}}", nGrams.prefixes.toString());
     }
 
+    @Test
+    public void testTrain05() {
+        NGrams nGrams = new NGrams(0, "abcd");
+        assertEquals("{={a=0.25, b=0.25, c=0.25, d=0.25}}", nGrams.prefixes.toString());
+    }
+
+    @Test
+    public void testTrain06() {
+        NGrams nGrams = new NGrams(1, "abcd");
+        assertEquals("{={a=0.25, b=0.25, c=0.25, d=0.25}, a={b=1.0}, b={c=1.0}, c={d=1.0}}", nGrams.prefixes.toString());
+    }
+
+    @Test
+    public void testTrain07() {
+        NGrams nGrams = new NGrams(10, "abcd");
+        assertEquals("{={a=0.25, b=0.25, c=0.25, d=0.25}, a={b=1.0}, ab={c=1.0}, bc={d=1.0}, b={c=1.0}, abc={d=1.0}, c={d=1.0}}", nGrams.prefixes.toString());
+    }
+
+    @Test
+    public void testTrain08() {
+        NGrams nGrams = new NGrams(3, "abcd");
+        assertEquals("{={a=0.25, b=0.25, c=0.25, d=0.25}, a={b=1.0}, ab={c=1.0}, bc={d=1.0}, b={c=1.0}, abc={d=1.0}, c={d=1.0}}", nGrams.prefixes.toString());
+    }
+
+    @Test
+    public void testTrain09() {
+        NGrams nGrams = new NGrams(2, "abcd");
+        assertEquals("{={a=0.25, b=0.25, c=0.25, d=0.25}, a={b=1.0}, ab={c=1.0}, bc={d=1.0}, b={c=1.0}, c={d=1.0}}", nGrams.prefixes.toString());
+    }
+
+    @Test
+    public void testTrain10() {
+        NGrams nGrams = new NGrams(4, "aacd");
+        assertEquals("{={a=0.5, c=0.25, d=0.25}, aa={c=1.0}, a={a=0.5, c=0.5}, aac={d=1.0}, ac={d=1.0}, c={d=1.0}}", nGrams.prefixes.toString());
+    }
 }
