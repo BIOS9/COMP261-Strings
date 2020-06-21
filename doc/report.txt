@@ -3,7 +3,7 @@ Matthew Corfiatis - COMP261 Assignment 5
 Marker Instructions:
 Hello marker, you can run the main method in the main.java.Assignment5 package inside src to open the GUI used to test Huffman and LempelZiv.
 I've used JUnit tests to run/test the rest of the assignment which you can find in the test.java package inside src.
-At the time of submission, all tests are passing so you should also expect all tests to pass. (You can skip the performance tests as they might take a few minutes and will always pass)
+At the time of submission, all tests passed (You can skip the performance tests as they might take a few minutes and will always pass if the data files exist)
 Some tests may fail if the data files are not in the data directory and I have included some extra data files that I used while testing my code.
 
 Questions:
