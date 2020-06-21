@@ -132,10 +132,10 @@ Q4:
 When the LZ window is made larger, the compression takes much longer but produces a better compressed result.
 
 Performance results:
-LZ Compress Time: 122ms			Decompress Time: 97ms		Window Size: 8		    Size: 16,168,250
-LZ Compress Time: 131ms			Decompress Time: 65ms		Window Size: 16		    Size: 1,4251,129
-LZ Compress Time: 155ms			Decompress Time: 56ms		Window Size: 32		    Size: 1,2532,486
-LZ Compress Time: 225ms			Decompress Time: 50ms		Window Size: 64		    Size: 1,0952,764
+LZ Compress Time: 122ms			Decompress Time: 97ms		Window Size: 8		    	Size: 16,168,250
+LZ Compress Time: 131ms			Decompress Time: 65ms		Window Size: 16		    	Size: 1,4251,129
+LZ Compress Time: 155ms			Decompress Time: 56ms		Window Size: 32		    	Size: 1,2532,486
+LZ Compress Time: 225ms			Decompress Time: 50ms		Window Size: 64		    	Size: 1,0952,764
 LZ Compress Time: 349ms			Decompress Time: 50ms		Window Size: 128		Size:  9,937,466
 LZ Compress Time: 549ms			Decompress Time: 47ms		Window Size: 256		Size:  8,964,194
 LZ Compress Time: 910ms			Decompress Time: 42ms		Window Size: 512		Size:  7,910,582
@@ -150,7 +150,7 @@ Size of Huffman encode then LZ: 14657551 characters
 The LZ compressed and huffman encoded data is much larger than just using the LZ compression.
 This is because when you compress data, it increases the entropy of the data so that each new byte encodes lots of new information. This is what the huffman encoding is doing.
 When LZ compression is run on this again, it cant compress the data much further and the overhead ends up outweighing the benefits making the data larger.
-The data cannot be compressed much more because it has already been compressed to near the fundamental losses data compression limit from Shannon's source coding theorem.
+The data cannot be compressed much more because it has already been compressed to near the fundamental lossless data compression limit from Shannon's source coding theorem.
 
 
 Q6:
@@ -165,8 +165,8 @@ Log2 Probability: -353.18784
 
 These log probabilities are so much different because the ngram model was trained on an entirely english dataset.
 Each language has its own patterns like common phrases, letters or sequences of characters like "ing" or "ion" in english.
-When the ngram model is trained, it builds a model which can fairly accurately predict these language patterns, so when the model is run
-The model has high probabilities for these english patterns of text, so the English whakatauki has a much higher probability than the Maori one which lacks most of the english patterns.
+When the ngram model is trained, it builds a model which can fairly accurately predict these language patterns, so when the model is 
+run it has high probabilities for these english patterns of text, so the English whakatauki has a much higher probability than the Maori one which lacks most of the english patterns.
 
 
 Q7:
