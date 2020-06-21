@@ -115,6 +115,7 @@ output length: 443632 bytes
 original and decoded texts match.
 Compression ratio: 2.27
 
+Best result was Taisho with a compression ratio of 2.36
 
 LZ77:
 Can use []| to delimit tuples in text as they do not occur
@@ -182,3 +183,84 @@ LZ Compress Time: 910ms			Decompress Time: 42ms		Window Size: 512		Size:  7,910,
 LZ Compress Time: 1645ms		Decompress Time: 41ms		Window Size: 1024		Size:  7,137,948
 
 
+
+
+
+Questions:
+
+Q1:
+I played around with different test data and found that when all of the patterns were a valid match in the text, or did not exist at all, the brute force algorithm was faster.
+The brute force algorithm was also faster on smaller patterns for smaller text due to the overhead of setting up KMP.
+KMP became faster when I added shuffled data in to the patterns to search for.
+
+For most small uses of string search I do not think KMP is worth the trouble. It will usually end up slower and it is harder to implement.
+And it turns out that the Java implementation of String::indexOf doesn't use KMP or any "fast" algorithm to do its job, it just uses the brute force approach.
+
+Performance results:
+BRUTE FORCE:
+Time taken for Brute Force: 2722 ms for 6105 TINY patterns | 0.45 ms per pattern.
+Time taken for Brute Force: 8044 ms for 17196 SMALL patterns | 0.47 ms per pattern.
+Time taken for Brute Force: 5336 ms for 11306 MEDIUM patterns | 0.47 ms per pattern.
+Time taken for Brute Force: 8261 ms for 17263 LARGE patterns | 0.48 ms per pattern.
+Time taken for Brute Force: 1 ms for 3 HUGE patterns | 0.33 ms per pattern.
+Total time taken for Brute Force was 24.36 seconds.
+
+KMP:
+Time taken for KMP: 2005 ms for 6103 TINY patterns | 0.33 ms per pattern.
+Time taken for KMP: 6451 ms for 17205 SMALL patterns | 0.37 ms per pattern.
+Time taken for KMP: 3984 ms for 11304 MEDIUM patterns | 0.35 ms per pattern.
+Time taken for KMP: 7564 ms for 17272 LARGE patterns | 0.44 ms per pattern.
+Time taken for KMP: 2 ms for 3 HUGE patterns | 0.67 ms per pattern.
+Total time taken for KMP was 20.01 seconds.
+
+
+
+Q2:
+STILL NEED TO DRAW TREE HERE
+War and Peace size after Huffman encode: 1848598 bytes
+
+
+
+Q3:
+Best result was Taisho with a compression ratio of 2.36
+Data that has a large amount of common characters will usually compress better because the common characters can be assigned a very small prefix.
+Another thing that affects the compression is how many distinct characters the data has. Data with less distinct characters will compress better than files with lots of unique characters.
+
+
+Q4:
+When the LZ window is made larger, the compression takes much longer but produces a better compressed result.
+
+Performance results:
+LZ Compress Time: 122ms			Decompress Time: 97ms		Window Size: 8		    Size: 16,168,250
+LZ Compress Time: 131ms			Decompress Time: 65ms		Window Size: 16		    Size: 1,4251,129
+LZ Compress Time: 155ms			Decompress Time: 56ms		Window Size: 32		    Size: 1,2532,486
+LZ Compress Time: 225ms			Decompress Time: 50ms		Window Size: 64		    Size: 1,0952,764
+LZ Compress Time: 349ms			Decompress Time: 50ms		Window Size: 128		Size:  9,937,466
+LZ Compress Time: 549ms			Decompress Time: 47ms		Window Size: 256		Size:  8,964,194
+LZ Compress Time: 910ms			Decompress Time: 42ms		Window Size: 512		Size:  7,910,582
+LZ Compress Time: 1645ms		Decompress Time: 41ms		Window Size: 1024		Size:  7,137,948
+
+
+Q5:
+War and Peace file compression.
+Size of LZ from original:        9865729 characters
+Size of Huffman encode then LZ: 14657551 characters
+
+The LZ compressed and huffman encoded data is much larger than just using the LZ compression.
+This is because the huffman encoding increases the entropy of the data so that each new character encodes lots of new information.
+When LZ compression is run on this again, it cant compress it much further and ends up just adding overhead making the data much larger.
+
+
+Q6:
+ngram trained on war_and_peace.txt
+Probability of 'a' after "a tak": 0.0010559662 n: 3
+
+Maori text: Turn your face to the sun and the shadows fall behind you, translation
+Log2 Probability: -143.39763
+
+English text: Hurihia to aroaro ki te ra tukuna to atarangi kia taka ki muri i a koe
+Log2 Probability: -353.18784
+
+These log probabilities are so much different because the ngram model was trained on an entirely english dataset.
+Since both languages have common patterns like in Maori, vowels appear to be more common than in english.
+The model has high probabilities for english patterns of text, so the English whakatauki has a much higher probability than the Maori one.
