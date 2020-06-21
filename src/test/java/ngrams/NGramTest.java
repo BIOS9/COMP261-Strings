@@ -79,6 +79,18 @@ public class NGramTest {
     }
 
     @Test
+    public void testMostLikelyBackOff01() {
+        NGrams nGrams = new NGrams(4, "abcd");
+        assertEquals('d', nGrams.findMostLikelyChar("ccc"));
+    }
+
+    @Test
+    public void testMostLikelyBackOff02() {
+        NGrams nGrams = new NGrams(4, "abcdccf");
+        assertEquals('f', nGrams.findMostLikelyChar("ccc"));
+    }
+
+    @Test
     public void testProbability01() {
         NGrams nGrams = new NGrams(4, "acad");
         assertEquals(0.5, nGrams.findProbabilityOf("a", 'c'));
@@ -101,5 +113,17 @@ public class NGramTest {
     public void testProbability04() {
         NGrams nGrams = new NGrams(4, "ababab");
         assertEquals(1, nGrams.findProbabilityOf("ab", 'a'));
+    }
+
+    @Test
+    public void testProbabilityBackOff01() {
+        NGrams nGrams = new NGrams(4, "abcd");
+        assertEquals(1, nGrams.findProbabilityOf("ccc", 'd'));
+    }
+
+    @Test
+    public void testProbabilityBackOff02() {
+        NGrams nGrams = new NGrams(4, "abcdccf");
+        assertEquals(1, nGrams.findProbabilityOf("ccc", 'f'));
     }
 }
