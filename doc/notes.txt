@@ -221,8 +221,8 @@ War and Peace size after Huffman encode: 1848598 bytes
 
 
 Q3:
-Best result was Taisho with a compression ratio of 2.36
-Data that has a large amount of common characters will usually compress better because the common characters can be assigned a very small prefix.
+Best result was Taisho with a compression ratio of 2.36x
+Data that has a large number of common characters will usually compress better because the common characters can be assigned a very small binary prefix.
 Another thing that affects the compression is how many distinct characters the data has. Data with less distinct characters will compress better than files with lots of unique characters.
 
 
@@ -246,8 +246,9 @@ Size of LZ from original:        9865729 characters
 Size of Huffman encode then LZ: 14657551 characters
 
 The LZ compressed and huffman encoded data is much larger than just using the LZ compression.
-This is because the huffman encoding increases the entropy of the data so that each new character encodes lots of new information.
-When LZ compression is run on this again, it cant compress it much further and ends up just adding overhead making the data much larger.
+This is because when you compress data, it increases the entropy of the data so that each new byte encodes lots of new information. This is what the huffman encoding is doing.
+When LZ compression is run on this again, it cant compress the data much further and the overhead ends up outweighing the benefits making the data larger.
+The data cannot be compressed much more because it has already been compressed to near the fundamental losses data compression limit from Shannon's source coding theorem.
 
 
 Q6:
