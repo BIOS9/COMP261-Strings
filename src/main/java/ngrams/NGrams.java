@@ -107,7 +107,7 @@ public class NGrams {
      * @return Log2 probability of the text occurring.
      */
     public float findLogProbabilityOf(String text) {
-        float logProb = 1;
+        float logProb = 0;
         for(int i = 0; i < text.length(); ++i) {
             int nInit = Math.min(maxPrefixSize, i); // Size of prefix. Cuts smaller at start of string.
             char c = text.charAt(i);
