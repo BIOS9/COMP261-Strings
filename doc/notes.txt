@@ -216,8 +216,92 @@ Total time taken for KMP was 20.01 seconds.
 
 
 Q2:
-STILL NEED TO DRAW TREE HERE
 War and Peace size after Huffman encode: 1848598 bytes
+Character encoding values:
+'\n' =  000111
+'\r' =  000101
+' '  =  001
+'a'  =  0111
+'b'  =  0000011
+'c'  =  010001
+'d'  =  01001
+'e'  =  111
+'f'  =  011001
+'g'  =  011011
+'h'  =  1101
+'i'  =  1011
+','  =  0000001
+'-'  =  011010011
+'.'  =  0001101
+'!'  =  0001100001
+'j'  =  00000100110
+'k'  =  1000001
+'l'  =  10001
+'m'  =  010000
+'n'  =  1010
+'o'  =  1001
+'p'  =  0000000
+'q'  =  00000100011
+'r'  =  00001
+'s'  =  1100
+'t'  =  0101
+'u'  =  000100
+'v'  =  0110101
+'w'  =  011000
+'x'  =  0001100000
+'y'  =  100001
+'z'  =  00000100010
+'"'  =  00000101
+'?'  =  0110100001
+'A'  =  100000001
+'B'  =  0001100111
+'C'  =  10000001001
+'D'  =  00000100111
+'E'  =  10000001000
+'F'  =  00011001001
+'G'  =  000001000011
+'H'  =  0001100101
+'I'  =  011010001
+'''  =  000110001
+'R'  =  00000100101
+'S'  =  1000000001
+'T'  =  011010010
+'('  =  0000010000001
+')'  =  100000000001
+'*'  =  00000100100001
+'0'  =  000001001000101
+'1'  =  00000100100011
+'2'  =  000001001000100
+'3'  =  1000000000001001
+'4'  =  10000000000010101
+'5'  =  1000000000001011
+'6'  =  1000000000001000
+'7'  =  10000000000000001
+'8'  =  10000000000011
+'9'  =  10000000000000011
+':'  =  000110010001
+';'  =  000001001001
+'J'  =  00000100100000
+'K'  =  000001000010
+'L'  =  0000010000000
+'M'  =  0110100000
+'N'  =  0001100110
+'O'  =  10000000001
+'P'  =  100000011
+'Q'  =  10000000000000000
+'U'  =  10000000000001
+'V'  =  000110010000
+'W'  =  1000000101
+'ê'  =  100000000000101001
+'X'  =  10000000000000010
+'Y'  =  000001000001
+'Z'  =  100000000000001
+'à'  =  1000000000001010001
+'/'  =  100000000000101000001
+'='  =  100000000000101000000
+'é'  =  1000000000001010000100
+'ä'  =  1000000000001010000101
+'\uFEFF'  =  100000000000101000011
 
 
 Q3:
@@ -264,25 +348,4 @@ Log2 Probability: -353.18784
 These log probabilities are so much different because the ngram model was trained on an entirely english dataset.
 Each language has its own patterns like common phrases, letters or sequences of characters like "ing" or "ion" in english.
 When the ngram model is trained, it builds a model which can fairly accurately predict these language patterns, so when the model is run
-The model has high probabilities for these english patterns of text, so the English whakatauki has a much higher probability than the Maori one.
-
-n = 2
-aLen = 1
-
-final = 110
-
-c:
-
-n = 3
-
-
-log2(3 + 1) + 3 = 5> 3
-
-n = 2
-
-log2(2 + 1) + 2 > 3
-
-n = 1
-
-log2(1 + 1) + 1 = 2 < 3
-
+The model has high probabilities for these english patterns of text, so the English whakatauki has a much higher probability than the Maori one which lacks most of the english patterns.

@@ -149,7 +149,7 @@ public class HuffmanCoding {
 
 		sb.append("\n\n\nCharacter encoding values:\n");
 		for(Map.Entry<String, String> c : encodingMap.entrySet()) {
-			sb.append("'" + c.getKey().replace("\n", "\\n") + "'  =  " + c.getValue() + "\n");
+			sb.append("'" + c.getKey().replace("\n", "\\n").replace("\r", "\\r") + "'  =  " + c.getValue() + "\n");
 		}
 
 		sb.append("\n\n\nTree table:\n");
