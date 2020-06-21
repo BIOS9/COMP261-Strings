@@ -6,7 +6,7 @@ public class BinaryStrings {
     public static String encode(String a, String b) {
         int totalLength = a.length() + b.length();
         String binary = Integer.toBinaryString(a.length());
-        int binaryBits = (int)(Math.log(totalLength) / Math.log(2) + 1e-10);
+        int binaryBits = (int)(Math.log(totalLength + 1) / Math.log(2) + 1e-10);
         while (binary.length() < binaryBits) {
             binary = "0" + binary;
         }
