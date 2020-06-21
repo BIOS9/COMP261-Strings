@@ -349,3 +349,8 @@ These log probabilities are so much different because the ngram model was traine
 Each language has its own patterns like common phrases, letters or sequences of characters like "ing" or "ion" in english.
 When the ngram model is trained, it builds a model which can fairly accurately predict these language patterns, so when the model is run
 The model has high probabilities for these english patterns of text, so the English whakatauki has a much higher probability than the Maori one which lacks most of the english patterns.
+
+
+Q7:
+184 bits for War and Peace
+79 bits for Grammar of New Zealand

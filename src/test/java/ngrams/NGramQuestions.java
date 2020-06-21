@@ -27,4 +27,20 @@ public class NGramQuestions {
         System.out.println("English text: " + sEnglish);
         System.out.println("Log2 Probability: " + englishResult + "\n");
     }
+
+    @Test
+    public void ngramAssignmentAnswers2() throws IOException {
+        String text = Util.readString("data/war_and_peace.txt");
+        String text2 = Util.readString("data/44897.txt");
+        NGrams nGram = new NGrams(5, text);
+
+        String saying = "Titiro whakamuri kia haere whakamua";
+
+        System.out.println(nGram.findLogProbabilityOf(saying));
+
+        nGram = new NGrams(5, text2);
+        System.out.println(nGram.findLogProbabilityOf(saying));
+
+        //float maoriResult = nGram.findLogProbabilityOf(sMaori);
+    }
 }
