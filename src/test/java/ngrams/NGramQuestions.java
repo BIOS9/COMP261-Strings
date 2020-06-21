@@ -40,7 +40,5 @@ public class NGramQuestions {
 
         nGram = new NGrams(5, text2);
         System.out.println(nGram.findLogProbabilityOf(saying));
-
-        //float maoriResult = nGram.findLogProbabilityOf(sMaori);
     }
 }
