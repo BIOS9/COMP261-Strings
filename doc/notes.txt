@@ -354,3 +354,37 @@ The model has high probabilities for these english patterns of text, so the Engl
 Q7:
 184 bits for War and Peace
 79 bits for Grammar of New Zealand
+
+
+Q8:
+Encode:
+```
+let len = |A| + |B|
+let binaryLength = Log2(len + 1)
+let binary = encode |A| using binaryLength bits
+return binary + A + B
+```
+
+Decode
+```
+let x = |Z|
+while (x > 0)
+    let l = Log2(x + 1)
+    if(l + x <= |Z|)
+        let aLen = binary decode Z from index 0 to l
+        let A = take Z from l to aLen + l
+        let B = take Z from aLen + l to |Z|
+
+        return (A, B)
+    end if
+    decrement x
+end while
+no result/return null
+```
+
+This relies on the logic that when you encode |A| in binary if you use Log2(len + 1) bits, |Z| = Log2(len + 1) + len where len is |A| + |B|
+This can then be decoded by initializing len to |Z| and decrementing it until the result is less than or equal to |Z|
+and then we know how many bits the length header is, and can then get A, and the rest of the string is B
+
+Working version of this code in main.java.binarystrings.BinaryStrings
+Code can be run using JUnit test in test.java.binarystrings.BinaryTest
